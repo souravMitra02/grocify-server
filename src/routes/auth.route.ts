@@ -5,9 +5,15 @@ const { verifyAuth } = require("../middlewares/auth.middleware");
 const router = express.Router();
 
 router.post("/login", loginUser);
+
+
 router.post("/logout", logoutUser);
+
 router.get("/check", verifyAuth, (req, res) => {
-  res.json({ message: "Authenticated" });
+  return res.json({
+    authenticated: true,
+    user: req.user || null, 
+  });
 });
 
 module.exports = router;

@@ -1,12 +1,12 @@
 const { generateToken } = require("../utils/generateToken");
 
+const DEMO_EMAIL = "admin@demo.com";
+const DEMO_PASSWORD = "123456";
+
 const loginUser = (req, res) => {
   const { email, password } = req.body;
 
-  const demoEmail = "admin@demo.com";
-  const demoPassword = "123456";
-
-  if (email !== demoEmail || password !== demoPassword) {
+  if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
     return res.status(400).json({ message: "Invalid credentials" });
   }
 
@@ -14,16 +14,17 @@ const loginUser = (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false,
+    secure: false,        
     sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  res.json({ message: "Login successful" });
+  return res.json({ message: "Login successful" });
 };
 
 const logoutUser = (req, res) => {
   res.clearCookie("token");
-  res.json({ message: "Logged out" });
+  return res.json({ message: "Logged out" });
 };
 
 module.exports = { loginUser, logoutUser };
