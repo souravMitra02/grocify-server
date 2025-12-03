@@ -3,7 +3,7 @@ const { generateToken } = require("../utils/generateToken");
 const DEMO_EMAIL = "admin@demo.com";
 const DEMO_PASSWORD = "123456";
 
-const loginUser = (req, res) => {
+const loginUser = (req:any, res:any) => {
   const { email, password } = req.body;
 
   if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
@@ -22,7 +22,7 @@ const loginUser = (req, res) => {
   return res.json({ message: "Login successful" });
 };
 
-const logoutUser = (req, res) => {
+const logoutUser = (req:any, res:any) => {
   res.clearCookie("token");
   return res.json({ message: "Logged out" });
 };

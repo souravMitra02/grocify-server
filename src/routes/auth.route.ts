@@ -9,7 +9,7 @@ router.post("/login", loginUser);
 
 router.post("/logout", logoutUser);
 
-router.get("/check", verifyAuth, (req, res) => {
+router.get("/check", verifyAuth, (req:any, res:any) => {
   return res.json({
     authenticated: true,
     user: req.user || null, 
