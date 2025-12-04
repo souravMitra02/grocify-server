@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://grocify-srote-new.netlify.app",
+  origin: "https://grocify-client.vercel.app",
   credentials: true
 }));
 
