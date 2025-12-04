@@ -1,9 +1,10 @@
+import { Request, Response } from "express";
 import { generateToken } from "../utils/generateToken";
 
 const DEMO_EMAIL = "admin@demo.com";
 const DEMO_PASSWORD = "123456";
 
-export function loginUser(req: any, res: any) {
+export const loginUser = (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
@@ -17,11 +18,11 @@ export function loginUser(req: any, res: any) {
   ]);
 
   return res.status(200).json({ message: "Login successful" });
-}
+};
 
-export function logoutUser(req: any, res: any) {
+export const logoutUser = (req: Request, res: Response) => {
   res.setHeader("Set-Cookie", [
     `token=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`,
   ]);
   return res.status(200).json({ message: "Logged out" });
-}
+};
