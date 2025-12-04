@@ -1,6 +1,6 @@
 const { logoutUser } = require("../../../controllers/auth.controller");
 
-module.exports = async function handler(req, res) {
+module.exports = async function handler(req:any, res:any) {
   if (req.method !== "POST")
     return res.status(405).json({ message: "Method not allowed" });
 
