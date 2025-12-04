@@ -1,8 +1,9 @@
 Grocify Backend
 
 ## Project Overview
+
 This is the backend for **Grocify**, a modern grocery product management system.  
-It is built using **Node.js**, **Express.js**, and **Firebase Firestore & Storage**.  
+It is built using **Node.js**, **Express.js**, and **Firebase Firestore & Storage**.
 
 The backend provides APIs for authentication, real-time product management, image uploads, and analytics data.
 
@@ -11,12 +12,14 @@ The backend provides APIs for authentication, real-time product management, imag
 ## Features
 
 ### Authentication
+
 - Secure login with JWT tokens.
 - JWT stored in HTTP-only cookies.
 - Demo admin credentials supported.
 - Middleware for protected routes.
 
 ### Product Management
+
 - CRUD operations on products:
   - Create (add new products)
   - Read (fetch products in real-time)
@@ -27,12 +30,14 @@ The backend provides APIs for authentication, real-time product management, imag
 - Server-side validation for required fields.
 
 ### Analytics
+
 - Total product count.
 - Active vs Inactive products.
 - Products grouped by category.
 - Real-time updates using Firestore snapshot listeners.
 
 ### Security & Validation
+
 - Input validation using middleware.
 - Secure Firebase API access via server-side environment variables.
 - CORS enabled for frontend communication.
@@ -40,6 +45,7 @@ The backend provides APIs for authentication, real-time product management, imag
 ---
 
 ## Demo Credentials
+
 Email: admin@demo.com
 Password: 123456
 
@@ -49,6 +55,7 @@ Copy code
 ---
 
 ## Project Structure
+
 backend/
 ├─ controllers/ # Request handlers
 │ ├─ auth.Controller.js
@@ -70,6 +77,7 @@ Copy code
 ## Installation
 
 Clone the repo:
+
 ```bash
 git clone https://github.com/souravMitra02/grocify-server
 cd backend
@@ -97,7 +105,7 @@ Copy code
 npm run dev
 # or
 yarn dev
-Server will run on http://localhost:5000 (default).
+Server will run on https://grocify-server-zeta.vercel.app/ (default).
 
 API Endpoints
 Authentication
@@ -135,3 +143,4 @@ dotenv – Environment variable support
 jsonwebtoken – JWT auth
 
 
+```
