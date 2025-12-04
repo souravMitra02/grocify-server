@@ -1,6 +1,6 @@
-import express from "express";
-import { loginUser, logoutUser } from "../controllers/auth.controller";
-import { verifyAuth } from "../middlewares/auth.middleware";
+const express = require("express");
+const { loginUser, logoutUser } = require("../controllers/auth.controller");
+const { verifyAuth } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -10,8 +10,8 @@ router.post("/logout", logoutUser);
 router.get("/check", verifyAuth, (req, res) => {
   return res.json({
     authenticated: true,
-    user: (req as any).user || null,
+    user: req.user || null,
   });
 });
 
-export default router;
+module.exports = router;

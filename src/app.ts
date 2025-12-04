@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import authRoutes from "./routes/auth.route";
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const authRoutes = require("./routes/auth.route");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,4 +21,3 @@ app.use("/api/auth", authRoutes);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-export default app;
