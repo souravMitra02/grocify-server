@@ -8,9 +8,7 @@ export interface AuthRequest extends Request {
 }
 
 export function verifyAuth(req: AuthRequest, res: Response, next: NextFunction) {
-  const cookie = req.headers.cookie || "";
-  const match = cookie.match(/token=([^;]+)/);
-  const token = match ? match[1] : null;
+  const token = req.cookies?.token;
 
   if (!token) return res.status(401).json({ message: "Not authenticated" });
 

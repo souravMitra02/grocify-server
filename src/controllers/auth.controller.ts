@@ -12,11 +12,12 @@ export function loginUser(req: Request, res: Response) {
   }
 
   const token = generateToken("demo-user-id");
-
+  const isProduction = process.env.NODE_ENV === "production";
+  
   res.setHeader(
-    "Set-Cookie",
-    `token=${token}; HttpOnly; Path=/; Max-Age=${7 * 24 * 60 * 60}; SameSite=Lax`
-  );
+  "Set-Cookie",
+  `token=${token}; HttpOnly; Path=/; Max-Age=${7*24*60*60}; SameSite=${isProduction ? "None" : "Lax"}; ${isProduction ? "Secure" : ""}`
+);
 
   return res.status(200).json({ message: "Login successful" });
 }
