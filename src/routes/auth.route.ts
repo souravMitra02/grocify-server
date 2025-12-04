@@ -6,10 +6,11 @@ const router = express.Router();
 
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+
 router.get("/check", verifyAuth, (req, res) => {
   return res.json({
     authenticated: true,
-    user: req.user || null,
+    user: (req as any).user || null,
   });
 });
 
