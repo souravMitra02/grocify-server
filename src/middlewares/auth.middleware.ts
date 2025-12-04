@@ -1,28 +1,15 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.JWT_SECRET || "demo-secret";
 
-const verifyAuth = (req:any, res:any, next:any) => {
-  const token = req.cookies?.token;
+function verifyAuth(req, res) {
+  const cookie = req.headers.cookie || "";
+  const match = cookie.match(/token=([^;]+)/);
+  const token = match ? match[1] : null;
 
-  if (!token) {
-    return res.status(401).json({
-      message: "No token found. Please log in again."
-    });
-  }
+  if (!token) throw new Error("Not authenticated");
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.user = decoded;
-
-    return next();
-  } catch (err) {
-    console.error("JWT verification failed:", { error: err });
-    
-    return res.status(401).json({
-      message: "Session expired or invalid token."
-    });
-  }
-};
+  const decoded = jwt.verify(token, SECRET_KEY);
+  req.user = { id: decoded.id };
+}
 
 module.exports = { verifyAuth };

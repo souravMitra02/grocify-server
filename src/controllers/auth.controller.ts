@@ -3,7 +3,7 @@ const { generateToken } = require("../utils/generateToken");
 const DEMO_EMAIL = "admin@demo.com";
 const DEMO_PASSWORD = "123456";
 
-const loginUser = (req:any, res:any) => {
+function loginUser(req, res) {
   const { email, password } = req.body;
 
   if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
@@ -12,19 +12,21 @@ const loginUser = (req:any, res:any) => {
 
   const token = generateToken("demo-user-id");
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: false,        
-    sameSite: "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  // Serverless compatible cookie
+  res.setHeader(
+    "Set-Cookie",
+    `token=${token}; HttpOnly; Path=/; Max-Age=${7 * 24 * 60 * 60}; SameSite=Lax`
+  );
 
-  return res.json({ message: "Login successful" });
-};
+  return res.status(200).json({ message: "Login successful" });
+}
 
-const logoutUser = (req:any, res:any) => {
-  res.clearCookie("token");
-  return res.json({ message: "Logged out" });
-};
+function logoutUser(req, res) {
+  res.setHeader(
+    "Set-Cookie",
+    `token=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`
+  );
+  return res.status(200).json({ message: "Logged out" });
+}
 
 module.exports = { loginUser, logoutUser };
