@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import  { Request, Response } from "express";
 import { generateToken } from "../utils/generateToken";
 
 const DEMO_EMAIL = "admin@demo.com";
@@ -19,8 +19,8 @@ export function loginUser(req: Request, res: Response) {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: true,       
+    sameSite: "none",  
     maxAge: 7 * 24 * 60 * 60 * 1000,
     path: "/",
   });
@@ -33,7 +33,7 @@ export function logoutUser(req: Request, res: Response) {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: 0,
+    expires: new Date(0),
     path: "/",
   });
 
