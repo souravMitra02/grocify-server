@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
-    origin: "https://grocify-client.vercel.app",
+    origin: "https://grocify-new-store.netlify.app",
     credentials: true,
 }));
 app.use("/api/auth", auth_route_1.default);
