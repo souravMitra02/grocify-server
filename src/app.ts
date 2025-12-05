@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://grocify-new-store.netlify.app",
+    origin: "https://grocify-client.vercel.app",
     credentials: true,
   })
 );
