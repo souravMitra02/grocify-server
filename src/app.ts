@@ -1,7 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const authRoutes = require("./routes/auth.route");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import authRoutes from "./routes/auth.route";
+
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,7 +15,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://grocify-client.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );

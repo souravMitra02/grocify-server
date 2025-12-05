@@ -1,8 +1,9 @@
-const express = require("express");
-const { loginUser, logoutUser } = require("../controllers/auth.controller");
-const { verifyAuth } = require("../middlewares/auth.middleware");
+import { Router } from "express";
+import { loginUser, logoutUser } from "../controllers/auth.controller";
+import { verifyAuth } from "../middlewares/verifyAuth";
 
-const router = express.Router();
+const router = Router();
+
 
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
@@ -10,8 +11,8 @@ router.post("/logout", logoutUser);
 router.get("/check", verifyAuth, (req, res) => {
   return res.json({
     authenticated: true,
-    user: req.user || null,
+    user: (req as any).user || null,
   });
 });
 
-module.exports = router;
+export default router;
