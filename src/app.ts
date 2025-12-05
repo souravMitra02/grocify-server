@@ -8,13 +8,12 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(express.json());
 app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://grocify-client.vercel.app",
+    origin: "https://grocify-new-store.netlify.app",
     credentials: true,
   })
 );
