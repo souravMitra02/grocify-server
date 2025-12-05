@@ -18,6 +18,9 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 app.use("/api/auth", auth_route_1.default);
+app.get("/", (req, res) => {
+    res.send("Server is running correctly");
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
