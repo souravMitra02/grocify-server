@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route";
 
-
 dotenv.config();
 
 const app = express();
@@ -22,12 +21,9 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 
-
 app.get("/", (req, res) => {
-  console.log("Someone accessed /"); 
   res.send("Server is running correctly");
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -4,7 +4,6 @@ import { verifyAuth } from "../middlewares/verifyAuth";
 
 const router = Router();
 
-
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
