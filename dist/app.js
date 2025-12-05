@@ -19,6 +19,7 @@ app.use((0, cors_1.default)({
 }));
 app.use("/api/auth", auth_route_1.default);
 app.get("/", (req, res) => {
+    console.log("Someone accessed /");
     res.send("Server is running correctly");
 });
 app.listen(PORT, () => {

@@ -105,7 +105,7 @@ Copy code
 npm run dev
 # or
 yarn dev
-Server will run on http://localhost:5000/ (default).
+Server will run on https://grocify-server-production.up.railway.app/ (default).
 
 API Endpoints
 Authentication
