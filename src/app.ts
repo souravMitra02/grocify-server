@@ -9,15 +9,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-// Allowed origins
 const allowedOrigins = [
   "http://localhost:3000",
   "https://grocify-new-store.netlify.app",
 ];
+
 
 app.use(
   cors({
@@ -31,22 +30,22 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true,
+    credentials: true, 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Set-Cookie"], 
+    exposedHeaders: ["Set-Cookie"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 
-app.options("*", cors());
-
+// Routes
 app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Grocify Server is running");
 });
 
-// Error handler
 app.use(
   (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("Server error:", err.stack);
