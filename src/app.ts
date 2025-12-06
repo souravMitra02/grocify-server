@@ -17,20 +17,19 @@ const allowedOrigins = [
   "https://grocify-new-store.netlify.app",
 ];
 
-
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.indexOf(origin) !== -1) {
+      if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         console.log("Blocked origin:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, 
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Set-Cookie"],
@@ -38,6 +37,8 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
+
+// app.options("/*", cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -49,14 +50,14 @@ app.get("/", (req, res) => {
 app.use(
   (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("Server error:", err.stack);
-    
+
     if (err.message === "Not allowed by CORS") {
-      return res.status(403).json({ 
+      return res.status(403).json({
         message: "CORS error: Origin not allowed",
-        origin: req.headers.origin 
+        origin: req.headers.origin,
       });
     }
-    
+
     res.status(500).json({ message: "Something went wrong!" });
   }
 );
