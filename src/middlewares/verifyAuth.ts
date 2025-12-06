@@ -10,15 +10,19 @@ export interface AuthRequest extends Request {
 }
 
 export function verifyAuth(req: AuthRequest, res: Response, next: NextFunction) {
-  let token = req.cookies?.token as string | undefined;
+  let token: string | undefined;
 
-  // fallback to Authorization header
-  if (!token) {
-    const authHeader = req.headers.authorization;
-    if (authHeader?.startsWith("Bearer ")) {
-      token = authHeader.substring(7);
-    }
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    token = authHeader.substring(7);
   }
+  if (!token) {
+    token = req.cookies?.token as string | undefined;
+  }
+
+  console.log("Auth check - Token found:", !!token);
+  console.log("Auth check - From header:", !!authHeader);
+  console.log("Auth check - From cookie:", !!req.cookies?.token);
 
   if (!token) {
     return res.status(401).json({
@@ -46,8 +50,10 @@ export function verifyAuth(req: AuthRequest, res: Response, next: NextFunction) 
       role: decoded.role ?? undefined,
     };
 
+    console.log("Auth successful for user:", decoded.email);
     next();
   } catch (err) {
+    console.error("Token verification failed:", err);
     return res.status(401).json({
       message: "Invalid or expired token",
       authenticated: false,

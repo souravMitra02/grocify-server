@@ -15,11 +15,13 @@ export function loginUser(req: Request, res: Response) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
-  // include useful claims
-  const token = generateToken({ id: "demo-user-id", email: DEMO_EMAIL, role: "admin" });
+  const token = generateToken({ 
+    id: "demo-user-id", 
+    email: DEMO_EMAIL, 
+    role: "admin" 
+  });
 
   const isProd = process.env.NODE_ENV === "production";
-
   res.cookie("token", token, {
     httpOnly: true,
     secure: isProd,
@@ -46,5 +48,8 @@ export function logoutUser(req: Request, res: Response) {
     path: "/",
   });
 
-  return res.status(200).json({ message: "Logged out successfully", authenticated: false });
+  return res.status(200).json({ 
+    message: "Logged out successfully", 
+    authenticated: false 
+  });
 }
