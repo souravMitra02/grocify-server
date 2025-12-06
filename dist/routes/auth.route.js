@@ -5,7 +5,7 @@ const auth_controller_1 = require("../controllers/auth.controller");
 const verifyAuth_1 = require("../middlewares/verifyAuth");
 const router = (0, express_1.Router)();
 router.post("/login", auth_controller_1.loginUser);
-router.post("/logout", auth_controller_1.logoutUser);
+router.post("/logout", verifyAuth_1.verifyAuth, auth_controller_1.logoutUser);
 router.get("/check", verifyAuth_1.verifyAuth, (req, res) => {
     return res.json({
         authenticated: true,
